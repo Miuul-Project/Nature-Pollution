@@ -1,70 +1,61 @@
-# 🌿 Nature–Pollution Project
+![License](https://img.shields.io/badge/license-Educational-blue.svg)
+![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
+![Language](https://img.shields.io/badge/language-Python-yellow.svg)
+
+# 🌍 Global CO₂ Analysis & Future Projections
 
 ## 👥 Project Members
 
-| Name             | Linkedin                                                          | GitHub                                     | Website                    |
-|------------------|--------------------------------------------------------------------|---------------------------------------------|----------------------------|
-| Alican Kaya      | [Linkedin](https://www.linkedin.com/in/alican-kaya-881650234/)     | [GitHub](https://github.com/AlicanKaya192) | [Website](https://alican-kaya.com/) |
-| Sude Şenol       | [Linkedin](http://www.linkedin.com/in/sude-%C5%9Fenol)             | [GitHub](https://github.com/sudesenoll)    | —                          |
-| Zülal Özge       | [Linkedin](https://www.linkedin.com/in/z%C3%BClal-%C3%B6zge-687488333) | [GitHub](https://github.com/zulalozge)     | —                          |
-| Hasret Erdoğan   | [Linkedin](https://www.linkedin.com/in/hasret-erdoğan-5b463b278)   | [GitHub](https://github.com/hasreterdogan)  | —                          |
-| Duru Bağdadioğlu | [Linkedin](https://www.linkedin.com/in/duru-ba%C4%9Fdadio%C4%9Flu/) | [GitHub](https://github.com/durubagdadioglu) | —                        |
+| Name | LinkedIn | GitHub | Website |
+|------|----------|--------|---------|
+| **Alican Kaya** | [LinkedIn](https://www.linkedin.com/in/alican-kaya-881650234/) | [GitHub](https://github.com/AlicanKaya192) | [Website](https://alican-kaya.com/) |
+| **Sude Şenol** | [LinkedIn](http://www.linkedin.com/in/sude-%C5%9Fenol) | [GitHub](https://github.com/sudesenoll) | — |
+| **Zülal Özge** | [LinkedIn](https://www.linkedin.com/in/z%C3%BClal-%C3%B6zge-687488333) | [GitHub](https://github.com/zulalozge) | — |
+| **Hasret Erdoğan** | [LinkedIn](https://www.linkedin.com/in/hasret-erdoğan-5b463b278) | [GitHub](https://github.com/hasreterdogan) | — |
+| **Duru Bağdadioğlu** | [LinkedIn](https://www.linkedin.com/in/duru-ba%C4%9Fdadio%C4%9Flu/) | [GitHub](https://github.com/durubagdadioglu) | — |
+
+## 📖 Project Overview
+This project presents a comprehensive data analysis of global CO₂ emission trends, aiming to uncover the root causes of climate change beyond simple emission statistics. By leveraging historical data from the Industrial Revolution to the present day, we explore the complex relationships between economic growth, population dynamics, energy consumption, and environmental impact.
+
+The study goes beyond visualization to provide **machine learning-based forecasts** for 2025-2028 and strategic recommendations for key global players (China, USA, India, etc.).
+
+## 📊 Data Story
+Our analysis is built upon the **Our World in Data** CO₂ dataset, a gold-standard resource in climate science.
+*   **Scope:** From the Industrial Revolution to 2024.
+*   **Focus:** We concentrate on the modern era (post-1990) to understand current geopolitical and environmental trends.
+*   **Philosophy:** We don't just ask *"How much are we polluting?"* but *"Why are we polluting?"*. To answer this, we integrate variables like **GDP, Population, and Energy Mix** into our models.
+
+## 🔍 Key Analysis Modules
+
+### 1. Historical Trends & Country Profiles
+*   Tracking the rise of global emissions.
+*   Comparative analysis of major economies: **China, USA, India, Russia, Germany, Turkey**.
+
+### 2. Drivers of Pollution (Correlation Analysis)
+*   Identifying the strongest predictors of CO₂ emissions (e.g., Population vs. GDP).
+*   Heatmaps revealing the "engine" of carbon output.
+
+### 3. Future Projections (ML Forecasting)
+*   **Multivariate Polynomial Regression** models trained on 2000-2024 data.
+*   Forecasting emissions through 2028 based on projected population and economic growth.
+
+### 4. Advanced Metrics
+*   **Production vs. Consumption:** Analyzing "Carbon Leakage"—do developed nations outsource their pollution?
+*   **Carbon Intensity (CO₂/GDP):** Measuring the "greenness" of economic growth.
+*   **Fossil Fuel Dependency:** Breaking down emissions by source (Coal, Oil, Gas).
+
+## 🛠️ Technologies & Methodology
+*   **Python:** Core programming language.
+*   **Pandas:** Advanced data manipulation and cleaning (Linear Interpolation for missing values).
+*   **Scikit-learn:** Machine Learning for regression models and forecasting.
+*   **Matplotlib & Seaborn:** Professional-grade data visualization.
+
+## 📂 Project Structure
+*   `co2-data.py`: The main analytical engine. Performs data cleaning, modeling, and generates all visualizations.
+*   `Datasets/`: Contains the raw `owid-co2-data.csv`.
+*   `img/`: Stores the generated charts and graphs used in reports.
+*   `metrics.json`: Stores model performance metrics (RMSE, R², MAE).
+*   `*.pdf`: Generated analysis reports and presentation guides.
 
 ---
-
-# 📦 Datasets
-
-Bu projede, dünya nüfusu, enerji tüketimi ve karbon emisyonları arasındaki uzun vadeli ilişkileri incelemek amacıyla uluslararası kaynaklardan derlenen üç temel veri seti kullanılmıştır. Veriler, Our World in Data ekibi tarafından standartlaştırılmış ve analiz yapılabilir hale getirilmiştir.
-
----
-
-## 1) CO₂ Emissions Dataset — `owid-co2-data.csv`
-
-**Sağlayan kurum:** Our World in Data  
-**Bu veri setinin temel kaynakları:** Global Carbon Project, UNFCCC, World Bank, IEA, BP Energy Review
-
-**İçerik:**  
-- CO₂, CH₄, N₂O emisyonları  
-- Kişi başı karbon emisyonu  
-- Enerji türlerine göre tüketim  
-- Ekonomik göstergeler (GDP)  
-- Ülke nüfusu  
-- Arazi kullanımı ve orman kaybı verileri  
-
-**İndirme bağlantısı:**  
-https://github.com/owid/co2-data
-
----
-
-## 2) Energy Dataset — `owid-energy-data.csv`
-
-**Sağlayan kurum:** Our World in Data  
-**Kaynaklar:** BP Statistical Review, IEA, U.S. Energy Information Administration
-
-**İçerik:**  
-- Fosil yakıt tüketimi  
-- Yenilenebilir enerji üretimi  
-- Ülke bazında toplam enerji tüketimi  
-- Kişi başı enerji tüketimi  
-- Enerji karışımı bileşenleri  
-
-**İndirme bağlantısı:**  
-https://github.com/owid/energy-data
-
----
-
-## 3) Population Dataset — `population.csv`
-
-**Sağlayan kurum:** World Bank & United Nations Population Division (OWID tarafından derlenmiştir)
-
-**İçerik:**  
-- Ülke nüfusu (1800–2023)  
-- Şehirleşme oranları  
-- Demografik büyüme verileri  
-
-**İndirme bağlantısı:**  
-https://ourworldindata.org/grapher/population.csv?download-format=tab
-
----
-
-Bu üç veri seti, projenin analiz ve modelleme süreçleri için gerekli olan nüfus, enerji ve kirlilik göstergelerini kapsamaktadır.
+*This project is part of the Miuul Data Science Bootcamp.*

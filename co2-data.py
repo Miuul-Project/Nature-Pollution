@@ -69,7 +69,7 @@ def clean_and_balance_data(data):
     print(data[['co2', 'population', 'gdp']].isnull().mean() * 100)
     
     # Önemli ülkeler için veri sayısını kontrol et
-    countries_check = ['China', 'United States', 'Russia', 'Turkey', 'Germany']
+    countries_check = ['China', 'United States', 'Russia', 'Turkey', 'Germany', 'India']
     print("\nData Points per Country (Selected):")
     print(data[data['country'].isin(countries_check)]['country'].value_counts())
 
@@ -114,7 +114,8 @@ COUNTRY_COLORS = {
     'United States': '#3498DB', # Blue
     'Germany': '#F1C40F',       # Yellow
     'Russia': '#8E44AD',        # Purple
-    'Turkey': '#E67E22'         # Orange
+    'Turkey': '#E67E22',        # Orange
+    'India': '#2ECC71'          # Green
 }
 
 # 1. Yıllara Göre Genel CO2 Artışı
@@ -133,7 +134,7 @@ print(f"Saved {output_dir}/global_co2_trend.png")
 
 # 2. Ülkeye Özgü Analiz
 print("\n--- Country-Specific Analysis ---")
-countries = ['China', 'United States', 'Russia', 'Turkey', 'Germany']
+countries = ['China', 'United States', 'Russia', 'Turkey', 'Germany', 'India']
 df_countries = df[df['country'].isin(countries)]
 
 plt.figure(figsize=(12, 6))
@@ -243,8 +244,8 @@ def predict_co2_multivariate(data, country_name=None):
     model = LinearRegression()
     model.fit(X, y)
     
-    # Gelecek Yıllar (2025-2030)
-    future_years = np.arange(2025, 2031)
+    # Gelecek Yıllar (2025-2028)
+    future_years = np.arange(2025, 2029)
     
     # Adım 1: Gelecek özellik değerlerini tahmin et
     future_features_df = forecast_features(df_subset, future_years)
@@ -284,13 +285,19 @@ def evaluate_model_multivariate(data):
     cols = [c for c in cols if c in data.columns and c != 'year']
     
     df_subset = data.groupby('year')[cols].mean().reset_index()
-    df_train_full = df_subset[(df_subset['year'] >= 2000) & (df_subset['year'] <= 2024)].dropna()
     
-    model_cols = [c for c in FEATURES if c in df_train_full.columns]
-    X = df_train_full[model_cols]
-    y = df_train_full['co2']
+    # Train: 2000-2018
+    train_data = df_subset[(df_subset['year'] >= 2000) & (df_subset['year'] <= 2018)].dropna()
+    # Test: 2019-2024
+    test_data = df_subset[(df_subset['year'] >= 2019) & (df_subset['year'] <= 2024)].dropna()
     
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    model_cols = [c for c in FEATURES if c in train_data.columns]
+    
+    X_train = train_data[model_cols]
+    y_train = train_data['co2']
+    
+    X_test = test_data[model_cols]
+    y_test = test_data['co2']
     
     model = LinearRegression()
     model.fit(X_train, y_train)
@@ -315,8 +322,8 @@ def evaluate_model_multivariate(data):
         "rmse": rmse,
         "mae": mae,
         "r2": r2,
-        "train_split": 0.8,
-        "test_split": 0.2,
+        "train_period": "2000-2018",
+        "test_period": "2019-2024",
         "model_type": "Multivariate Linear Regression"
     }
     
@@ -333,7 +340,7 @@ df_train_global, future_years, pred_global, model_global, ci_lower_global, ci_up
 plt.figure(figsize=(12, 6))
 if df_train_global is not None:
     sns.lineplot(data=df_train_global, x='year', y='co2', label='Historical (2000-2024)', color='black')
-    plt.plot(future_years, pred_global, color='red', linestyle='--', label='Multivariate Prediction (2025-2030)')
+    plt.plot(future_years, pred_global, color='red', linestyle='--', label='Multivariate Prediction (2025-2028)')
     plt.fill_between(future_years.flatten(), ci_lower_global, ci_upper_global, color='red', alpha=0.2, label='95% Confidence Interval')
     plt.title('Global CO2 Emissions Forecast (Multivariate Model)')
     plt.ylabel('CO2 Emissions (Million Tonnes)')
@@ -356,9 +363,9 @@ for country in countries:
         last_hist = df_train['co2'].iloc[-1]
         last_pred = preds[-1]
         trend = "Increasing" if last_pred > last_hist else "Decreasing"
-        print(f"{country}: Trend is {trend} (2030 Pred: {last_pred:.2f} vs Last Hist: {last_hist:.2f})")
+        print(f"{country}: Trend is {trend} (2028 Pred: {last_pred:.2f} vs Last Hist: {last_hist:.2f})")
 
-plt.title('CO2 Emissions Forecast by Country (Multivariate, 2025-2030)')
+plt.title('CO2 Emissions Forecast by Country (Multivariate, 2025-2028)')
 plt.ylabel('CO2 Emissions (Million Tonnes)')
 plt.xlabel('Year')
 plt.legend()
@@ -511,3 +518,133 @@ if existing_fuel_cols:
         print(f"Saved {output_dir}/fossil_fuel_mix.png")
     else:
         print("No valid data found for fossil fuel analysis.")
+
+# 11. Nüfus Tahmini (2025-2028)
+print("\n--- Population Forecast (2025-2028) ---")
+plt.figure(figsize=(12, 6))
+future_years_pop = np.arange(2025, 2029)
+
+for country in countries:
+    country_data = df[df['country'] == country].dropna(subset=['population'])
+    if len(country_data) > 5:
+        # Basit bir lineer/polinom model ile nüfus tahmini
+        X_pop = country_data[['year']]
+        y_pop = country_data['population']
+        
+        # Nüfus genelde lineer artmaz ama kısa vade için lineer veya 2. derece uygun olabilir
+        # Burada robust olması için 2. derece polinom kullanalım
+        poly_pop = PolynomialFeatures(degree=2)
+        X_poly_pop = poly_pop.fit_transform(X_pop)
+        
+        model_pop = LinearRegression()
+        model_pop.fit(X_poly_pop, y_pop)
+        
+        future_years_reshaped = future_years_pop.reshape(-1, 1)
+        future_poly_pop = poly_pop.transform(future_years_reshaped)
+        pred_pop = model_pop.predict(future_poly_pop)
+        
+        # Geçmiş veriyi çiz
+        color = COUNTRY_COLORS.get(country, 'gray')
+        plt.plot(country_data['year'], country_data['population'] / 1e6, label=f'{country} (Hist)', color=color)
+        
+        # Tahmini çiz
+        plt.plot(future_years_pop, pred_pop / 1e6, linestyle='--', color=color) #, label=f'{country} (Pred)'
+
+plt.title('Population Forecast (2025-2028)')
+plt.ylabel('Population (Millions)')
+plt.xlabel('Year')
+plt.legend()
+plt.grid(True, linestyle='--', alpha=0.7)
+plt.savefig(f'{output_dir}/population_forecast.png')
+print(f"Saved {output_dir}/population_forecast.png")
+
+# 12. CO2 Etki Analizi (Population Driven)
+# Bu analizde kişi başı emisyonun sabit kaldığı senaryoda nüfus artışının etkisi gösterilir
+print("\n--- CO2 Impact Analysis (Population Driven) ---")
+plt.figure(figsize=(12, 6))
+
+for country in countries:
+    country_data = df[df['country'] == country].dropna(subset=['co2', 'population', 'co2_per_capita'])
+    if not country_data.empty:
+        last_hist_year = country_data['year'].max()
+        last_per_capita = country_data.loc[country_data['year'] == last_hist_year, 'co2_per_capita'].values[0]
+        
+        # Nüfus tahminini tekrar al (yukarıdaki döngüden saklayabilirdik ama tekrar hesaplayalım temiz olsun)
+        X_pop = country_data[['year']]
+        y_pop = country_data['population']
+        poly_pop = PolynomialFeatures(degree=2)
+        X_poly_pop = poly_pop.fit_transform(X_pop)
+        model_pop = LinearRegression()
+        model_pop.fit(X_poly_pop, y_pop)
+        
+        future_years_reshaped = future_years_pop.reshape(-1, 1)
+        future_poly_pop = poly_pop.transform(future_years_reshaped)
+        pred_pop = model_pop.predict(future_poly_pop)
+        
+        # Nüfus kaynaklı tahmini CO2 (Kişi başı sabit)
+        pop_driven_co2 = pred_pop * last_per_capita
+        
+        color = COUNTRY_COLORS.get(country, 'gray')
+        # Sadece tahmin kısmını çizelim, karşılaştırma için
+        plt.plot(future_years_pop, pop_driven_co2, linestyle=':', linewidth=2, color=color, label=f'{country} (Pop. Driven)')
+
+plt.title('Projected CO2 if Per Capita Emissions Remain Constant (2025-2028)')
+plt.ylabel('CO2 Emissions (Million Tonnes)')
+plt.xlabel('Year')
+plt.legend()
+plt.grid(True, linestyle='--', alpha=0.7)
+plt.savefig(f'{output_dir}/co2_impact_analysis.png')
+print(f"Saved {output_dir}/co2_impact_analysis.png")
+
+# 13. Üretim vs Tüketim Bazlı Emisyon Analizi
+print("\n--- Production vs Consumption Analysis ---")
+for country in countries:
+    country_data = df[df['country'] == country].sort_values('year')
+    
+    # Veri kontrolü
+    if 'consumption_co2' in country_data.columns and not country_data['consumption_co2'].isnull().all():
+        plt.figure(figsize=(10, 6))
+        
+        # Üretim Bazlı
+        sns.lineplot(data=country_data, x='year', y='co2', label='Production (Territorial)', color=COUNTRY_COLORS.get(country, 'blue'), linewidth=2)
+        
+        # Tüketim Bazlı
+        sns.lineplot(data=country_data, x='year', y='consumption_co2', label='Consumption (Trade-Adjusted)', color='gray', linestyle='--', linewidth=2)
+        
+        # Alanı doldur
+        plt.fill_between(country_data['year'], country_data['co2'], country_data['consumption_co2'], alpha=0.1, color='gray')
+        
+        plt.title(f'{country}: Production vs Consumption CO2 Emissions')
+        plt.ylabel('CO2 Emissions (Million Tonnes)')
+        plt.xlabel('Year')
+        plt.legend()
+        plt.grid(True, linestyle='--', alpha=0.7)
+        
+        filename = f'{output_dir}/prod_vs_cons_{country}.png'
+        plt.savefig(filename)
+        print(f"Saved {filename}")
+        plt.close()
+    else:
+        print(f"Skipping {country}: No consumption data.")
+
+# 14. Ekonomik Karbon Yoğunluğu (CO2 per GDP)
+print("\n--- Carbon Intensity Analysis (CO2 per GDP) ---")
+plt.figure(figsize=(12, 7))
+
+for country in countries:
+    country_data = df[df['country'] == country].sort_values('year')
+    # 2000 sonrası
+    country_data = country_data[country_data['year'] >= 2000]
+    
+    if 'co2_per_gdp' in country_data.columns:
+        sns.lineplot(data=country_data, x='year', y='co2_per_gdp', label=country, color=COUNTRY_COLORS.get(country), linewidth=2)
+
+plt.title('Economic Carbon Intensity (CO2 per GDP) Trend (2000-2024)')
+plt.ylabel('CO2 per GDP (kg per $)')
+plt.xlabel('Year')
+plt.legend()
+plt.grid(True, linestyle='--', alpha=0.7)
+plt.savefig(f'{output_dir}/carbon_intensity_trend.png')
+print(f"Saved {output_dir}/carbon_intensity_trend.png")
+
+

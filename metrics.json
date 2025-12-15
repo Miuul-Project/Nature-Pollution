@@ -1,1 +1,1 @@
-{"rmse": 0.3584133171140225, "mae": 0.2827841351227562, "r2": 0.9999878650460836, "train_split": 0.8, "test_split": 0.2, "model_type": "Multivariate Linear Regression"}
+{"rmse": 2.549143893618086, "mae": 2.2299446135787093, "r2": 0.989724571335683, "train_period": "2000-2018", "test_period": "2019-2024", "model_type": "Multivariate Linear Regression"}
