@@ -1,0 +1,1 @@
+{"rmse": 6.365183584691057, "mae": 6.076536280055393, "r2": 0.9359331878983762, "train_period": "2000-2018", "test_period": "2019-2024", "model_type": "Multivariate Linear Regression (TIME-SAFE IMPUTE)"}
