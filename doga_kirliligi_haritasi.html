@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_7b13d946af0c974062ca8fa7e3e4547c {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_7b13d946af0c974062ca8fa7e3e4547c" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_7b13d946af0c974062ca8fa7e3e4547c = L.map(
+                "map_7b13d946af0c974062ca8fa7e3e4547c",
+                {
+                    center: [30.0, 10.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 2,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_a80b568f7ab938467fdb009dcea12b9b = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_a80b568f7ab938467fdb009dcea12b9b.addTo(map_7b13d946af0c974062ca8fa7e3e4547c);
+        
+    
+            var marker_15b95cab26ff24e2873b3e623af83719 = L.marker(
+                [35.8617, 104.1954],
+                {
+}
+            ).addTo(map_7b13d946af0c974062ca8fa7e3e4547c);
+        
+    
+            var icon_770b179058673c4ee72596b969d8f510 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkred",
+  "iconColor": "white",
+  "icon": "warning",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fb12fdf2151872e64f942a4e6d5951a0 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_f03486a344d7a3d3be4fb8e1071427e1 = $(`<div id="html_f03486a344d7a3d3be4fb8e1071427e1" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 150px;">         <h4>China</h4>         <p><b>Kirlilik Oranı:</b> %82</p>         <p><b>Ana Neden:</b> Sanayi</p>     </div>     </div>`)[0];
+                popup_fb12fdf2151872e64f942a4e6d5951a0.setContent(html_f03486a344d7a3d3be4fb8e1071427e1);
+            
+        
+
+        marker_15b95cab26ff24e2873b3e623af83719.bindPopup(popup_fb12fdf2151872e64f942a4e6d5951a0)
+        ;
+
+        
+    
+    
+            marker_15b95cab26ff24e2873b3e623af83719.bindTooltip(
+                `<div>
+                     China
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_15b95cab26ff24e2873b3e623af83719.setIcon(icon_770b179058673c4ee72596b969d8f510);
+            
+    
+            var marker_7f46569ff5556fcdb68cd64ed7637e87 = L.marker(
+                [37.0902, -95.7129],
+                {
+}
+            ).addTo(map_7b13d946af0c974062ca8fa7e3e4547c);
+        
+    
+            var icon_0bc302a11330d059998f2d90c216cd93 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "warning",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d52cd644ded4eb7a4fef623b9d2c2f1a = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_b21765a93174dd990a1f369b97c89394 = $(`<div id="html_b21765a93174dd990a1f369b97c89394" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 150px;">         <h4>USA</h4>         <p><b>Kirlilik Oranı:</b> %65</p>         <p><b>Ana Neden:</b> Ulaşım</p>     </div>     </div>`)[0];
+                popup_d52cd644ded4eb7a4fef623b9d2c2f1a.setContent(html_b21765a93174dd990a1f369b97c89394);
+            
+        
+
+        marker_7f46569ff5556fcdb68cd64ed7637e87.bindPopup(popup_d52cd644ded4eb7a4fef623b9d2c2f1a)
+        ;
+
+        
+    
+    
+            marker_7f46569ff5556fcdb68cd64ed7637e87.bindTooltip(
+                `<div>
+                     USA
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7f46569ff5556fcdb68cd64ed7637e87.setIcon(icon_0bc302a11330d059998f2d90c216cd93);
+            
+    
+            var marker_57f1638617565b6cc53d462363385891 = L.marker(
+                [20.5937, 78.9629],
+                {
+}
+            ).addTo(map_7b13d946af0c974062ca8fa7e3e4547c);
+        
+    
+            var icon_f6aaff7df8237eb553d3f57b42f8a8da = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkred",
+  "iconColor": "white",
+  "icon": "warning",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a5064169d5b9b05bab5a812c37114ce8 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_282b03ed65a73d2b06e1b81efe4863e6 = $(`<div id="html_282b03ed65a73d2b06e1b81efe4863e6" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 150px;">         <h4>India</h4>         <p><b>Kirlilik Oranı:</b> %88</p>         <p><b>Ana Neden:</b> Nüfus Artışı</p>     </div>     </div>`)[0];
+                popup_a5064169d5b9b05bab5a812c37114ce8.setContent(html_282b03ed65a73d2b06e1b81efe4863e6);
+            
+        
+
+        marker_57f1638617565b6cc53d462363385891.bindPopup(popup_a5064169d5b9b05bab5a812c37114ce8)
+        ;
+
+        
+    
+    
+            marker_57f1638617565b6cc53d462363385891.bindTooltip(
+                `<div>
+                     India
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_57f1638617565b6cc53d462363385891.setIcon(icon_f6aaff7df8237eb553d3f57b42f8a8da);
+            
+    
+            var marker_f826f879ed7a338cc3aafbddf5a82498 = L.marker(
+                [61.524, 105.3188],
+                {
+}
+            ).addTo(map_7b13d946af0c974062ca8fa7e3e4547c);
+        
+    
+            var icon_c537e71309ef4e0438a11f2209dcde90 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "warning",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_dd67608f8ed1a349fc2972ac7d4bf429 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_1bd618a84b5d73a19d2b1b15cf035dd6 = $(`<div id="html_1bd618a84b5d73a19d2b1b15cf035dd6" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 150px;">         <h4>Russia</h4>         <p><b>Kirlilik Oranı:</b> %55</p>         <p><b>Ana Neden:</b> Enerji Üretimi</p>     </div>     </div>`)[0];
+                popup_dd67608f8ed1a349fc2972ac7d4bf429.setContent(html_1bd618a84b5d73a19d2b1b15cf035dd6);
+            
+        
+
+        marker_f826f879ed7a338cc3aafbddf5a82498.bindPopup(popup_dd67608f8ed1a349fc2972ac7d4bf429)
+        ;
+
+        
+    
+    
+            marker_f826f879ed7a338cc3aafbddf5a82498.bindTooltip(
+                `<div>
+                     Russia
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f826f879ed7a338cc3aafbddf5a82498.setIcon(icon_c537e71309ef4e0438a11f2209dcde90);
+            
+    
+            var marker_573cfaa3712ac0077d82f6a2e25b985e = L.marker(
+                [51.1657, 10.4515],
+                {
+}
+            ).addTo(map_7b13d946af0c974062ca8fa7e3e4547c);
+        
+    
+            var icon_6a7791086d919c07685db262be48f9b9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "warning",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_28000eb64321edd8e24f6387aa1f27c5 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_40b95b6d464304474833b414e9fdb4c5 = $(`<div id="html_40b95b6d464304474833b414e9fdb4c5" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 150px;">         <h4>Germany</h4>         <p><b>Kirlilik Oranı:</b> %40</p>         <p><b>Ana Neden:</b> Atık Yönetimi</p>     </div>     </div>`)[0];
+                popup_28000eb64321edd8e24f6387aa1f27c5.setContent(html_40b95b6d464304474833b414e9fdb4c5);
+            
+        
+
+        marker_573cfaa3712ac0077d82f6a2e25b985e.bindPopup(popup_28000eb64321edd8e24f6387aa1f27c5)
+        ;
+
+        
+    
+    
+            marker_573cfaa3712ac0077d82f6a2e25b985e.bindTooltip(
+                `<div>
+                     Germany
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_573cfaa3712ac0077d82f6a2e25b985e.setIcon(icon_6a7791086d919c07685db262be48f9b9);
+            
+    
+            var marker_cf7e85335f00cc8262fa35ff55a39422 = L.marker(
+                [38.9637, 35.2433],
+                {
+}
+            ).addTo(map_7b13d946af0c974062ca8fa7e3e4547c);
+        
+    
+            var icon_f33ef05cbc79940fd38953e638eecae7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "warning",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9a53154e6124cf556ee598582aec96a5 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_54f4a54cde108f2b643502f4e5702289 = $(`<div id="html_54f4a54cde108f2b643502f4e5702289" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 150px;">         <h4>Turkey</h4>         <p><b>Kirlilik Oranı:</b> %72</p>         <p><b>Ana Neden:</b> Fosil Yakıtlar</p>     </div>     </div>`)[0];
+                popup_9a53154e6124cf556ee598582aec96a5.setContent(html_54f4a54cde108f2b643502f4e5702289);
+            
+        
+
+        marker_cf7e85335f00cc8262fa35ff55a39422.bindPopup(popup_9a53154e6124cf556ee598582aec96a5)
+        ;
+
+        
+    
+    
+            marker_cf7e85335f00cc8262fa35ff55a39422.bindTooltip(
+                `<div>
+                     Turkey
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_cf7e85335f00cc8262fa35ff55a39422.setIcon(icon_f33ef05cbc79940fd38953e638eecae7);
+            
+</script>
+</html>
