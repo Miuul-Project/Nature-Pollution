@@ -38,7 +38,7 @@ Bu proje, **Miuul Veri Bilimi Bootcamp** kapsamında 5 kişilik ekibimizle gerç
     <td><b>Alican Kaya</b></td>
     <td><a href="https://www.linkedin.com/in/alican-kaya-881650234/">LinkedIn</a></td>
     <td><a href="https://github.com/AlicanKaya192">GitHub</a></td>
-    <td><a href="https://alican-kaya.com/">🌐 Website</a></td>
+    <td><a href="https://alican-kaya.com/">🌐 Portfolio</a></td>
   </tr>
   <tr>
     <td><b>Sude Şenol</b></td>
